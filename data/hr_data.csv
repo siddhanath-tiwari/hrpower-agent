@@ -1,0 +1,5 @@
+name,email,phone,whatsapp,skills,job_title
+John Doe,john.doe@example.com,1234567890,9876543210,"Python, NLP, Machine Learning",Data Scientist
+Jane Smith,jane.smith@example.com,0987654321,8765432109,"Java, Spring, Microservices",Software Engineer
+Alice Johnson,alice.johnson@example.com,1122334455,5566778899,"JavaScript, React, Node.js",Frontend Developer
+Bob Brown,bob.brown@example.com,2233445566,6677889900,"SQL, Data Warehousing, BI Tools",Data Analyst

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered HR Agents</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>AI-Powered HR Agents</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('upload_resume') }}">Upload Resume</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Enhance Your HR Operations</h1>
+            <p>Integrate AI-driven automation into your HR processes with our intelligent agents.</p>
+        </div>
+    </section>
+
+    <section id="boxes">
+        <div class="container">
+            <div class="box">
+                <h3>Customer Support Agent</h3>
+                <p>Efficiently handle HR queries and document understanding.</p>
+            </div>
+            <div class="box">
+                <h3>Recruitment Assistant</h3>
+                <p>Automate resume screening, interview scheduling, and feedback collection.</p>
+            </div>
+            <div class="box">
+                <h3>HR Analytics</h3>
+                <p>Gain insights from HR data and improve decision-making.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Box -->
+    <div id="chat_box">
+        <h3>HR Chat Bot</h3>
+        <div id="chat_messages"></div>
+        <input type="text" id="user_input" placeholder="Ask HR bot..." />
+        <button onclick="sendMessage()">Send</button>
+        <button onclick="closeChat()">Close</button>
+    </div>
+    <button id="chat_toggle" onclick="openChat()">Chat with HR Bot</button>
+
+    <footer>
+        <p>&copy; 2025 AI-Powered HR Agents. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function openChat() {
+            document.getElementById("chat_box").style.display = "block";
+        }
+
+        function closeChat() {
+            document.getElementById("chat_box").style.display = "none";
+        }
+
+        async function sendMessage() {
+            let userMessage = document.getElementById("user_input").value;
+            let chatMessages = document.getElementById("chat_messages");
+
+            let response = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "message": userMessage })
+            });
+
+            let data = await response.json();
+            chatMessages.innerHTML += "<p><b>You:</b> " + userMessage + "</p>";
+            chatMessages.innerHTML += "<p><b>Bot:</b> " + data.response + "</p>";
+            document.getElementById("user_input").value = "";
+        }
+    </script>
+</body>
+</html>

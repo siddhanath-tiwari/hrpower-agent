@@ -1,0 +1,19 @@
+<script>
+    async function sendMessage() {
+        let userMessage = document.getElementById("user_input").value;
+        let responseArea = document.getElementById("chat_response");
+
+        let response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ "message": userMessage })
+        });
+
+        let data = await response.json();
+        responseArea.innerHTML = data.response;
+    }
+</script>
+
+<input type="text" id="user_input" placeholder="Ask HR bot..." />
+<button onclick="sendMessage()">Send</button>
+<div id="chat_response"></div>
